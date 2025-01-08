@@ -21,7 +21,7 @@ async function grabUrl()
     disQ.innerHTML = `<span>${data.results[0].question}</span>`  + `<br>`  + `<br>`;
     
     disO = document.getElementById("disO"); 
-    disO.innerHTML = `<span>${data.results[0].correct_answer}</span>`+ `<span>${data.results[0].incorrect_answers} </span>`;
+    disO.innerHTML = `<span>${data.results[0].correct_answer}</span>`+  `<br>` + `<span>${data.results[0].incorrect_answers} </span>` + `<br>`;
     }
 
     catch
