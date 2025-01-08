@@ -12,7 +12,7 @@ async function grabUrl()
     {
     const response = await fetch(baseApi);
     const data = await response.json();
-    console.log(data);
+
 
     difficulty = document.getElementById("difficulty"); 
     difficulty.innerHTML = `<span>Difficulty:</span>` + `<span>${data.results[0].difficulty}</span>` + `<br>` + `<br>`;
@@ -22,11 +22,13 @@ async function grabUrl()
     
     disO = document.getElementById("disO"); 
     disO.innerHTML = `<span>${data.results[0].correct_answer}</span>`+  `<br>` + `<span>${data.results[0].incorrect_answers} </span>` + `<br>`;
+    console.log(data);
+    return data;
     }
 
-    catch
+    catch(error)
     {
-        console.error("Error Fetching Api");
+        console.error("Error Fetching Api", error);
     }
 
 }
