@@ -21,7 +21,13 @@ async function grabUrl()
     disQ.innerHTML = `<span>${data.results[0].question}</span>`  + `<br>`  + `<br>`;
     
     disO = document.getElementById("disO"); 
-    disO.innerHTML = `<button>${data.results[0].correct_answer}</button>`+  `<br>` + `<button>${data.results[0].incorrect_answers} </button>` + `<br>`;
+    disO.innerHTML = `<button class="buttons">${data.results[0].correct_answer}</button>`+  `<br>`;
+
+    for(i in data.results[0].incorrect_answers)
+    {
+        disQ.innerHTML += `<button class="buttons">${data.results[0].incorrect_answers[i]} </button>` + `<br>`;
+    }
+
     console.log(data);
     return data;
     }
