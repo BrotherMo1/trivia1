@@ -1,0 +1,85 @@
+{
+  "response_code": 0,
+  "results": [
+    {
+      "category": "Science & Nature",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the heaviest organ in the human body?",
+      "correct_answer": "Liver",
+      "incorrect_answers": ["Brain", "Heart", "Skin"]
+    },
+    {
+      "category": "Entertainment: Video Games",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What is the name of Mario's brother?",
+      "correct_answer": "Luigi",
+      "incorrect_answers": ["Wario", "Waluigi", "Toad"]
+    },
+    {
+      "category": "History",
+      "type": "boolean",
+      "difficulty": "hard",
+      "question": "The Battle of Hastings was fought in 1066.",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "category": "Entertainment: Film",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "Who played the character of Harry Potter in the film series?",
+      "correct_answer": "Daniel Radcliffe",
+      "incorrect_answers": ["Rupert Grint", "Elijah Wood", "Tom Felton"]
+    },
+    {
+      "category": "General Knowledge",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the term for a positive electrode?",
+      "correct_answer": "Anode",
+      "incorrect_answers": ["Cathode", "Diode", "Triode"]
+    },
+    {
+      "category": "Geography",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the capital of Australia?",
+      "correct_answer": "Canberra",
+      "incorrect_answers": ["Sydney", "Melbourne", "Brisbane"]
+    },
+    {
+      "category": "Sports",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The Olympics are held every 6 years.",
+      "correct_answer": "False",
+      "incorrect_answers": ["True"]
+    },
+    {
+      "category": "Art",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Who painted the ceiling of the Sistine Chapel?",
+      "correct_answer": "Michelangelo",
+      "incorrect_answers": ["Leonardo da Vinci", "Raphael", "Donatello"]
+    },
+    {
+      "category": "Mythology",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "In Greek mythology, Hera is the goddess of marriage.",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "category": "Entertainment: Music",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Which classical composer became deaf later in life?",
+      "correct_answer": "Ludwig van Beethoven",
+      "incorrect_answers": ["Wolfgang Amadeus Mozart", "Johann Sebastian Bach", "Franz Schubert"]
+    }
+  ]
+}
