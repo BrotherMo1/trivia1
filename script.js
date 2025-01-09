@@ -6,32 +6,20 @@ let disQ;
 let disO;
 let difficulty;
 
+
+window.onload = function ()
+{
+    grabUrl();
+}
 async function grabUrl()
 {
     try
     {
     const response = await fetch(baseApi);
     const data = await response.json();
-
-
-    difficulty = document.getElementById("difficulty"); 
-    difficulty.innerHTML = `<span>Difficulty:</span>` + `<span>${data.results[0].difficulty}</span>` + `<br>` + `<br>`;
-
-    disQ = document.getElementById("disQ"); 
-    disQ.innerHTML = `<span>${data.results[0].question}</span>`  + `<br>`  + `<br>`;
-    
-    disO = document.getElementById("disO"); 
-    disO.innerHTML = `<button class="buttons">${data.results[0].correct_answer}</button>`+  `<br>`;
-
-    for(i in data.results[0].incorrect_answers)
-    {
-        disQ.innerHTML += `<button class="buttons">${data.results[0].incorrect_answers[i]} </button>` + `<br>`;
-    }
-
     console.log(data);
-    return data;
+    qAs(data);
     }
-
     catch(error)
     {
         console.error("Error Fetching Api", error);
@@ -39,4 +27,35 @@ async function grabUrl()
 
 }
 
-grabUrl();
+async function qAs (data)
+{
+    let container = document.getElementById("container");
+    container.innerHTML = '';   
+    for(i in data.results)
+    {
+        difficulty = document.getElementById("difficulty"); 
+        difficulty.innerHTML = `<span>Difficulty:</span>` + `<span>${data.results[i].difficulty}</span>` + `<br>` + `<br>`;
+    
+        let questions = document.createElement('div');
+
+        let quest = document.createElement('h3');
+        quest.innerHTML = data.results[i].question;
+        questions.appendChild(quest);
+
+        //`<p>${data.results[i].question}</p>`  + `<br>`  + `<br>`;
+
+        let answers = document.createElement('div');
+
+        let ans = document.createElement('div')
+        ans.innerHTML = data.results[i].correct_answer;
+        answers.appendChild(ans);
+    
+        for(j in data.results[i].incorrect_answers)
+        {
+            answers.innerHTML += `<div class="buttons">${data.results[i].incorrect_answers[j]} </div>`;
+        }
+        container.appendChild(questions);
+        container.appendChild(answers);
+    }
+}
+
