@@ -6,7 +6,7 @@ let disQ;
 let disO;
 let difficulty;
 
-
+// pexels api key: vl3EiNGXGZACABgTOliTXjU9okdiloezxhaMKUbYUjrxY05suMB9fibD
 window.onload = function ()
 {
     grabUrl();
