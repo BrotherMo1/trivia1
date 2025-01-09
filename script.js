@@ -1,7 +1,7 @@
-let baseApi = "https://opentdb.com/api.php?amount=10";
-const easyApi = baseApi + "&difficulty=easy";
-const midApi = baseApi + "&difficulty=medium";
-const hardApi = baseApi + "&difficulty=hard";
+let trivApi = "https://opentdb.com/api.php?amount=10";
+const easyApi = trivApi + "&difficulty=easy";
+const midApi = trivApi + "&difficulty=medium";
+const hardApi = trivApi + "&difficulty=hard";
 let disQ;
 let disO;
 let difficulty;
@@ -15,7 +15,7 @@ async function grabUrl()
 {
     try
     {
-    const response = await fetch(baseApi);
+    const response = await fetch(trivApi);
     const data = await response.json();
     console.log(data);
     qAs(data);
