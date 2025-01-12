@@ -29,7 +29,7 @@ async function grabUrl()
 
 }
 
-async function qAs (data)
+async function qAs (data, data1)
 {
     let container = document.getElementById("container");
     container.innerHTML = '';   
@@ -51,6 +51,9 @@ async function qAs (data)
         let ans = document.createElement('div')
         ans.innerHTML = data.results[i].correct_answer;
         answers.appendChild(ans);
+
+        let img = document.createElement('div')
+        img.innerHTML = `<img src=${data1[i].src.medium}> alt="image not available"`;
     
         for(j in data.results[i].incorrect_answers)
         {
