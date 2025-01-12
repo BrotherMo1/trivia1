@@ -53,7 +53,7 @@ async function qAs (data, data1)
         answers.appendChild(ans);
 
         let img = document.createElement('div')
-        img.innerHTML = `<img src=${data1[i].src.medium}> alt="image not available"`;
+        img.innerHTML = `<img src=${data1[0].src.medium}> alt="image not available"`;
     
         for(j in data.results[i].incorrect_answers)
         {
