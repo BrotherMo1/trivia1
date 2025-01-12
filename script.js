@@ -86,7 +86,7 @@ async function qAs (data)
 // }
 
 async function fetchPexelsData(data, search) {
-    const url = "https://api.pexels.com/v1/search?per_page=1&query=" + search;
+    const url = "https://api.pexels.com/v1/search?per_page=1&query=" + data.results[0].correct_answer + data.results[0].question;
     const headers = {
         "Authorization": apiKey
     };
