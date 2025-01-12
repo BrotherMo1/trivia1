@@ -29,7 +29,7 @@ async function grabUrl()
 
 }
 
-async function qAs (data, data1)
+async function qAs (data)
 {
     let container = document.getElementById("container");
     container.innerHTML = '';   
@@ -59,10 +59,6 @@ async function qAs (data, data1)
         container.appendChild(questions);
         container.appendChild(answers);
     }
-    
-    let img = document.createElement('div')
-    img.innerHTML = `<img src=${data1.photos[0].src.medium}> alt="image not available"`;
-    
     imgDelivery(data);
 }
 
@@ -89,8 +85,7 @@ async function qAs (data, data1)
 
 // }
 
-async function fetchPexelsData(data) {
-    const search = data.results[0].correct_answer + data.results[0].question;
+async function fetchPexelsData(data, search) {
     const url = "https://api.pexels.com/v1/search?per_page=1&query=" + search;
     const headers = {
         "Authorization": apiKey
@@ -118,8 +113,3 @@ async function imgDelivery (data)
     console.log(data.results[0].correct_answer, data.results[0].question);
 }
 
-// const regex = /^[A-Z]/;  // Regex that matches words that start with a capital letter
-//         let paragraph = ["Hello", "cool", "World", "example", "Apple"];
-        
-//         let result = paragraph.filter(word => regex.test(word));  // Filters words that start with a capital letter
-//         console.log(result);  
