@@ -2,96 +2,70 @@ let trivApi = "https://opentdb.com/api.php?amount=10";
 const easyApi = trivApi + "&difficulty=easy";
 const midApi = trivApi + "&difficulty=medium";
 const hardApi = trivApi + "&difficulty=hard";
+
 let apiKey = "vl3EiNGXGZACABgTOliTXjU9okdiloezxhaMKUbYUjrxY05suMB9fibD";
-let disQ;
-let disO;
-let difficulty;
 
-
-window.onload = function ()
-{
+window.onload = function () {
     grabUrl();
-    // imgSearch();
-}
-async function grabUrl()
-{
-    try
-    {
-    const response = await fetch(trivApi);
-    const data = await response.json();
-    console.log(data);
-    qAs(data);
-    }
-    catch(error)
-    {
-        console.error("Error Fetching Api", error);
-    }
+};
 
+async function grabUrl() {
+    try {
+        const response = await fetch(trivApi);
+        const data = await response.json();
+        console.log(data);
+        qAs(data);
+        imgDelivery(data); // Deliver images after questions are displayed.
+    } catch (error) {
+        console.error("Error Fetching API", error);
+    }
 }
 
-async function qAs (data)
-{
+async function qAs(data) {
     let container = document.getElementById("container");
-    container.innerHTML = '';   
-    for(i in data.results)
-    {
-        difficulty = document.getElementById("difficulty"); 
-        difficulty.innerHTML = `<span>Difficulty:</span>` + `<span>${data.results[i].difficulty}</span>` + `<br>` + `<br>`;
-    
-        let questions = document.createElement('div');
+    container.innerHTML = "";
 
-        let quest = document.createElement('h3');
-        quest.innerHTML = data.results[i].question;
-        questions.appendChild(quest);
- 
-        //`<p>${data.results[i].question}</p>`  + `<br>`  + `<br>`;
+    for (let i = 0; i < data.results.length; i++) {
+        // Create question container
+        let questionDiv = document.createElement("div");
+        questionDiv.className = "question";
 
-        let answers = document.createElement('div');
+        // Display question text
+        let quest = document.createElement("h3");
+        quest.innerText = data.results[i].question;
+        questionDiv.appendChild(quest);
 
-        let ans = document.createElement('div')
-        ans.innerHTML = data.results[i].correct_answer;
-        answers.appendChild(ans);
-    
-        for(j in data.results[i].incorrect_answers)
-        {
-            answers.innerHTML += `<div class="buttons">${data.results[i].incorrect_answers[j]} </div>`;
-        }
-        container.appendChild(questions);
-        container.appendChild(answers);
+        // Create answers container
+        let answersDiv = document.createElement("div");
+        answersDiv.className = "answers";
+
+        // Add correct answer
+        let correctAnswer = document.createElement("div");
+        correctAnswer.innerText = data.results[i].correct_answer;
+        correctAnswer.className = "correct";
+        answersDiv.appendChild(correctAnswer);
+
+        // Add incorrect answers
+        data.results[i].incorrect_answers.forEach(incorrect => {
+            let incorrectAnswer = document.createElement("div");
+            incorrectAnswer.innerText = incorrect;
+            incorrectAnswer.className = "incorrect";
+            answersDiv.appendChild(incorrectAnswer);
+        });
+
+        container.appendChild(questionDiv);
+        container.appendChild(answersDiv);
     }
-    imgDelivery(data);
 }
 
-// let query = 'apple';
-// async function imgSearch(query){
-//     // fetch the data from api
-//     try {
-//         const data=await
-// fetch(`https://api.pexels.com/v1/search?query=${query}?orientation=square
-// `,
-//             {
-//                 method: "GET",
-//                 headers: {
-//                     Accept: "application/json",
-//                     Authorization: apiKey,       
-//                 },
-//             });
-//             const response=await data.json(); 
-//             console.log(response);
-//     } catch (error) {
-//         console.error('Error fetching image:', error);
-
-//     }
-
-// }
-
-async function fetchPexelsData(data, search) {
-    let search = data.results[0].correct_answer + data.results[0].question
-    let res = search.split(" ").join("");
-    console.log(res);
-    const url = "https://api.pexels.com/v1/search?per_page=1&query=" + search;
+async function fetchPexelsData(data) {
+    let correctAnswer = data.results[0].correct_answer;
+    let question = data.results[0].question;
+    let query = `${correctAnswer} ${question}`.replace(/\s+/g, "");
+    
+    const url = `https://api.pexels.com/v1/search?per_page=1&query=${query}`;
     const headers = {
-        "Authorization": apiKey
+        Authorization: apiKey
     };
 
     try {
@@ -101,18 +75,21 @@ async function fetchPexelsData(data, search) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const data1 = await response.json();
-        console.log(data1);
-        return data1;
+        const imageData = await response.json();
+        console.log(imageData);
+        return imageData;
     } catch (error) {
         console.error("Error fetching data:", error);
     }
 }
 
-async function imgDelivery (data)
-{
-
-    fetchPexelsData(data.results[0].correct_answer, data.results[0].question);
-    console.log(data.results[0].question, data.results[0].correct_answer);
+async function imgDelivery(data) {
+    try {
+        const imageData = await fetchPexelsData(data);
+        let image = document.createElement("img");
+        image.src = imageData.photos[0].src.medium;
+        document.getElementById("container").appendChild(image);
+    } catch (error) {
+        console.error("Error delivering image:", error);
+    }
 }
-
