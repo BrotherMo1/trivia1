@@ -15,7 +15,7 @@ async function grabUrl() {
         const data = await response.json();
         console.log(data);
         qAs(data);
-        imgDelivery(data); // Deliver images after questions are displayed.
+        imgDelivery(data);
     } catch (error) {
         console.error("Error Fetching API", error);
     }
@@ -34,6 +34,12 @@ async function qAs(data) {
         let quest = document.createElement("h3");
         quest.innerText = data.results[i].question;
         questionDiv.appendChild(quest);
+
+        // Display difficulty
+        let difficultyDiv = document.createElement("p");
+        difficultyDiv.className = "difficulty";
+        difficultyDiv.innerHTML = `<strong>Difficulty:</strong> ${data.results[i].difficulty}`;
+        questionDiv.appendChild(difficultyDiv);
 
         // Create answers container
         let answersDiv = document.createElement("div");
@@ -86,9 +92,13 @@ async function fetchPexelsData(data) {
 async function imgDelivery(data) {
     try {
         const imageData = await fetchPexelsData(data);
-        let image = document.createElement("img");
-        image.src = imageData.photos[0].src.medium;
-        document.getElementById("container").appendChild(image);
+        if (imageData && imageData.photos && imageData.photos.length > 0) {
+            let image = document.createElement("img");
+            image.src = imageData.photos[0].src.medium; // Ensure that photo object exists and is defined.
+            document.getElementById("container").appendChild(image);
+        } else {
+            console.error("No image data found.");
+        }
     } catch (error) {
         console.error("Error delivering image:", error);
     }
