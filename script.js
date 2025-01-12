@@ -90,6 +90,7 @@ async function qAs (data, data1)
 // }
 
 async function fetchPexelsData(data) {
+    const search = data.results[0].correct_answer + data.results[0].question;
     const url = "https://api.pexels.com/v1/search?per_page=1&query=" + search;
     const headers = {
         "Authorization": apiKey
@@ -117,3 +118,8 @@ async function imgDelivery (data)
     console.log(data.results[0].correct_answer, data.results[0].question);
 }
 
+// const regex = /^[A-Z]/;  // Regex that matches words that start with a capital letter
+//         let paragraph = ["Hello", "cool", "World", "example", "Apple"];
+        
+//         let result = paragraph.filter(word => regex.test(word));  // Filters words that start with a capital letter
+//         console.log(result);  
