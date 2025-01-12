@@ -51,9 +51,6 @@ async function qAs (data, data1)
         let ans = document.createElement('div')
         ans.innerHTML = data.results[i].correct_answer;
         answers.appendChild(ans);
-
-        let img = document.createElement('div')
-        img.innerHTML = `<img src=${data1[0].src.medium}> alt="image not available"`;
     
         for(j in data.results[i].incorrect_answers)
         {
@@ -62,6 +59,10 @@ async function qAs (data, data1)
         container.appendChild(questions);
         container.appendChild(answers);
     }
+    
+    let img = document.createElement('div')
+    img.innerHTML = `<img src=${data1.src.medium}> alt="image not available"`;
+
     imgDelivery(data);
 }
 
