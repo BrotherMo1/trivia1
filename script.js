@@ -14,8 +14,8 @@ async function grabUrl() {
         const response = await fetch(trivApi);
         const data = await response.json();
         console.log(data);
-        qAs(data);
-        imgDelivery(data);
+        qAs(data);  // Render questions and answers
+        await imgDelivery(data);  // Attach corresponding images
     } catch (error) {
         console.error("Error Fetching API", error);
     }
@@ -25,7 +25,8 @@ async function qAs(data) {
     let container = document.getElementById("container");
     container.innerHTML = "";
 
-    for (let i = 0; i < data.results.length; i++) {
+    for (let i = 0; i < data.results.length; i++) 
+        {
         // Create question container
         let questionDiv = document.createElement("div");
         questionDiv.className = "question";
@@ -59,47 +60,59 @@ async function qAs(data) {
             answersDiv.appendChild(incorrectAnswer);
         });
 
+        // Append question and answers to container
         container.appendChild(questionDiv);
         container.appendChild(answersDiv);
     }
 }
 
-async function fetchPexelsData(data) {
-    let correctAnswer = data.results[0].correct_answer;
-    let question = data.results[0].question;
-    let query = `${correctAnswer} ${question}`.replace(/\s+/g, "");
-    
-    const url = `https://api.pexels.com/v1/search?per_page=1&query=${query}`;
-    const headers = {
+async function fetchPexelsData(query) {
+    const url = `https://api.pexels.com/v1/search?per_page=1&query=${encodeURIComponent(query)}`;
+    const headers = 
+    {
         Authorization: apiKey
     };
 
-    try {
+    try 
+    {
         const response = await fetch(url, { headers });
-
-        if (!response.ok) {
+        if (!response.ok) 
+        {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
         const imageData = await response.json();
         console.log(imageData);
-        return imageData;
-    } catch (error) {
-        console.error("Error fetching data:", error);
+        return imageData.photos[0]?.src.medium || null; // Return the image URL or null
+    } catch (error) 
+    {
+        console.error("Error fetching Pexels data:", error);
+        return null; // Return null on failure
     }
 }
 
 async function imgDelivery(data) {
-    try {
-        const imageData = await fetchPexelsData(data);
-        if (imageData && imageData.photos && imageData.photos.length > 0) {
-            let image = document.createElement("img");
-            image.src = imageData.photos[0].src.medium; // Ensure that photo object exists and is defined.
-            document.getElementById("container").appendChild(image);
-        } else {
-            console.error("No image data found.");
+    const container = document.getElementById("container");
+    const questionElements = document.querySelectorAll(".question");
+
+    for (let i = 0; i < data.results.length; i++) 
+        {
+        const query = `${data.results[i].question} ${data.results[i].correct_answer}`;
+        console.log(query);
+        const imageUrl = await fetchPexelsData(query);
+
+        if (imageUrl) 
+        {
+            // Create an image element
+            const img = document.createElement("img");
+            img.src = imageUrl;
+            img.alt = `Image for ${data.results[i].question}`;
+            img.className = "question-image";
+
+            // Append the image to the corresponding question
+            questionElements[i].appendChild(img);
+        } else 
+            {
+            console.error(`No image found for question: ${data.results[i].question}`);
+            }
         }
-    } catch (error) {
-        console.error("Error delivering image:", error);
-    }
 }
