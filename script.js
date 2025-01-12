@@ -109,6 +109,6 @@ async function fetchPexelsData(data, search) {
 async function imgDelivery (data)
 {
 
-    fetchPexelsData(data.results[0].correct_answer + data.results[0].question);
+    fetchPexelsData(data.results[0].correct_answer, data.results[0].question);
 }
 
