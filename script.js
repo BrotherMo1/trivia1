@@ -110,5 +110,6 @@ async function imgDelivery (data)
 {
 
     fetchPexelsData(data.results[0].correct_answer, data.results[0].question);
+    console.log(data.results[0].correct_answer, data.results[0].question);
 }
 
