@@ -1,25 +1,54 @@
+
 let trivApi = "https://opentdb.com/api.php?amount=10";
 const easyApi = trivApi + "&difficulty=easy";
 const midApi = trivApi + "&difficulty=medium";
 const hardApi = trivApi + "&difficulty=hard";
+let catelist = document.getElementById("catelist");
 
 let apiKey = "vl3EiNGXGZACABgTOliTXjU9okdiloezxhaMKUbYUjrxY05suMB9fibD";
 
-window.onload = function () {
-    grabUrl();
-};
-
-async function grabUrl() {
+async function grabUrl(num) {
+    if (num == 1)
+        {
+          trivApi = trivApi;
+        }
+        else if (num == 2)
+        {
+          trivApi = easyApi;
+        }
+        else if (num == 3)
+        {
+          trivApi = midApi;
+        }
+        else 
+        {
+              trivApi = hardApi;
+        }
+    
     try {
         const response = await fetch(trivApi);
         const data = await response.json();
         console.log(data);
+        categories(data)
         qAs(data);  // Render questions and answers
         await imgDelivery(data);  // Attach corresponding images
     } catch (error) {
         console.error("Error Fetching API", error);
     }
 }
+
+function categories(data) {
+    for(let i = 0; i < data.results.length; i++)
+    {
+        const category = data.results.category;
+        let options = `<option value="">Select a Category</option>`;
+    }
+  
+    for (let j in category) {
+        options += `<option value="${j}">${j}</option>`
+    }
+    catelist.innerHTML = options;
+  }
 
 async function qAs(data) {
     let container = document.getElementById("container");
@@ -33,7 +62,7 @@ async function qAs(data) {
 
         // Display question text
         let quest = document.createElement("h3");
-        quest.innerText = data.results[i].question;
+        quest.innerHTML = data.results[i].question;
         questionDiv.appendChild(quest);
 
         // Display difficulty
@@ -48,14 +77,14 @@ async function qAs(data) {
 
         // Add correct answer
         let correctAnswer = document.createElement("div");
-        correctAnswer.innerText = data.results[i].correct_answer;
+        correctAnswer.innerHTML = data.results[i].correct_answer;
         correctAnswer.className = "correct";
         answersDiv.appendChild(correctAnswer);
 
         // Add incorrect answers
         data.results[i].incorrect_answers.forEach(incorrect => {
             let incorrectAnswer = document.createElement("div");
-            incorrectAnswer.innerText = incorrect;
+            incorrectAnswer.innerHTML = incorrect;
             incorrectAnswer.className = "incorrect";
             answersDiv.appendChild(incorrectAnswer);
         });
@@ -106,7 +135,7 @@ async function imgDelivery(data) {
             const img = document.createElement("img");
             img.src = imageUrl;
             img.alt = `Image for ${data.results[i].question}`;
-            img.className = "question-image";
+            img.className = "imageQ";
 
             // Append the image to the corresponding question
             questionElements[i].appendChild(img);
