@@ -29,7 +29,7 @@ async function grabUrl(num) {
         const response = await fetch(trivApi);
         const data = await response.json();
         console.log(data);
-        categories(data)
+        // categories(data)
         qAs(data);  // Render questions and answers
         await imgDelivery(data);  // Attach corresponding images
     } catch (error) {
@@ -37,18 +37,18 @@ async function grabUrl(num) {
     }
 }
 
-function categories(data) {
-    for(let i = 0; i < data.results.length; i++)
-    {
-        const category = data.results.category;
-        let options = `<option value="">Select a Category</option>`;
-    }
+// function categories(data) {
+//     for(let i = 0; i < data.results.length; i++)
+//     {
+//         const category = data.results.category;
+//         let options = `<option value="">Select a Category</option>`;
+//     }
   
-    for (let j in category) {
-        options += `<option value="${j}">${j}</option>`
-    }
-    catelist.innerHTML = options;
-  }
+//     for (let j in category) {
+//         options += `<option value="${j}">${j}</option>`
+//     }
+//     catelist.innerHTML = options;
+//   }
 
 async function qAs(data) {
     let container = document.getElementById("container");
