@@ -4,6 +4,7 @@ const easyApi = trivApi + "&difficulty=easy";
 const midApi = trivApi + "&difficulty=medium";
 const hardApi = trivApi + "&difficulty=hard";
 let catelist = document.getElementById("catelist");
+let option;
 
 let apiKey = "vl3EiNGXGZACABgTOliTXjU9okdiloezxhaMKUbYUjrxY05suMB9fibD";
 
@@ -29,7 +30,7 @@ async function grabUrl(num) {
         const response = await fetch(trivApi);
         const data = await response.json();
         console.log(data);
-        // categories(data)
+        // categories(data);
         qAs(data);  // Render questions and answers
         await imgDelivery(data);  // Attach corresponding images
     } catch (error) {
@@ -37,18 +38,33 @@ async function grabUrl(num) {
     }
 }
 
-// function categories(data) {
-//     for(let i = 0; i < data.results.length; i++)
-//     {
-//         const category = data.results.category;
-//         let options = `<option value="">Select a Category</option>`;
-//     }
-  
-//     for (let j in category) {
-//         options += `<option value="${j}">${j}</option>`
-//     }
-//     catelist.innerHTML = options;
-//   }
+async function categories() {
+    let url = "https://opentdb.com/api_category.php";
+
+    try
+    {
+        const response = await fetch(url);
+        const data = await response.json();
+        let cate =  document.getElementById('catelist');
+
+        data.trivia_categories.forEach (category => {
+            option = document.createElement('option');
+            option.value = category.id;
+            option.innerHTML = category.name;
+            cate.appendChild(option);
+        });
+        let urlCate = trivApi + "&category=" + data.trivia_categories.id;
+        console.log(urlCate);
+    }catch(error)
+    {
+        console.error("Couldn't Fetch Categories", error);
+    }
+  }
+
+  window.onload = function ()
+  {
+    categories();
+  }
 
 async function qAs(data) {
     let container = document.getElementById("container");
