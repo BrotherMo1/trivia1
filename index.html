@@ -13,10 +13,10 @@
     <button type="button" onclick="grabUrl(3)">Medium Difficulty</button>
     <button type="button" onclick="grabUrl(4)">Hard Difficulty</button>
 <br><br>
-<form id="form" onsumbit="categories()">
+<form id="form" onsubmit="return handleSubmit(event);">
     <label for="catelist">Choose a Category:</label>
     <select name="catelist" id="catelist">
-      <option value="">Select Any Category</option>
+        <option value="">Select Any Category</option>
     </select>
     <input type="submit" value="Submit">
 </form>
