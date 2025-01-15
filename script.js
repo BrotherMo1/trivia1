@@ -5,17 +5,7 @@ const hardApi = trivApi + "&difficulty=hard";
 
 let apiKey = "vl3EiNGXGZACABgTOliTXjU9okdiloezxhaMKUbYUjrxY05suMB9fibD";
 
-async function grabUrl(num) {
-    // Adjust API endpoint based on difficulty level
-    if (num === 1) {
-        trivApi = trivApi; // Default difficulty
-    } else if (num === 2) {
-        trivApi = easyApi;
-    } else if (num === 3) {
-        trivApi = midApi;
-    } else {
-        trivApi = hardApi;
-    }
+async function grabUrl() {
 
     try {
         const response = await fetch(trivApi);
@@ -52,9 +42,10 @@ function handleSubmit(event) {
     event.preventDefault(); // Prevent form submission
 
     let selectedCategory = document.getElementById("catelist").value;
+    let difficulty = document.getElementById("difficulty").value;
 
     if (selectedCategory) {
-        trivApi = `https://opentdb.com/api.php?amount=10&category=${selectedCategory}`;
+        trivApi = `https://opentdb.com/api.php?amount=10&category=${selectedCategory}&difficulty=${difficulty}`;
         console.log("Updated trivApi:", trivApi);
 
         // Optionally call grabUrl to fetch questions immediately
@@ -62,6 +53,7 @@ function handleSubmit(event) {
     } else {
         console.log("No Category Selected");
     }
+    document.getElementById("submission").style.display = "none";
 }
 
 // Populate the dropdown on page load
