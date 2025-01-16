@@ -44,16 +44,20 @@ function handleSubmit(event) {
     let selectedCategory = document.getElementById("catelist").value;
     let difficulty = document.getElementById("difficulty").value;
 
+    // Set API based on user selection
     if (selectedCategory) {
         trivApi = `https://opentdb.com/api.php?amount=10&category=${selectedCategory}&difficulty=${difficulty}`;
-        console.log("Updated trivApi:", trivApi);
-
-        // Optionally call grabUrl to fetch questions immediately
-        grabUrl(1); // Default difficulty
     } else {
-        console.log("No Category Selected");
+        trivApi = `https://opentdb.com/api.php?amount=10&difficulty=${difficulty}`;
     }
+
+    console.log("Updated trivApi:", trivApi);
+
+    // Fetch questions based on updated trivApi
+    grabUrl();
     document.getElementById("submission").style.display = "none";
+        // Clear the text 
+        document.getElementById("intro").innerHTML = "";
 }
 
 // Populate the dropdown on page load
