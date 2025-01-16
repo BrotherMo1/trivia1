@@ -87,24 +87,50 @@ async function qAs(data) {
         let answersDiv = document.createElement("div");
         answersDiv.className = "answers";
 
+        let array = [];
         // Add correct answer
-        let correctAnswer = document.createElement("div");
-        correctAnswer.innerHTML = data.results[i].correct_answer;
-        correctAnswer.className = "correct";
-        answersDiv.appendChild(correctAnswer);
+        let correctAnswer = data.results[i].correct_answer;
+        array.push(correctAnswer)
 
         // Add incorrect answers
         data.results[i].incorrect_answers.forEach((incorrect) => {
-            let incorrectAnswer = document.createElement("div");
-            incorrectAnswer.innerHTML = incorrect;
-            incorrectAnswer.className = "incorrect";
-            answersDiv.appendChild(incorrectAnswer);
+            array.push(incorrect)
         });
+
+        array.sort(() => Math.random() - .5);
+
+        for(j in array)
+        {
+            answer = document.createElement('button');
+            answer.id = 'answer';
+            answer.innerHTML = array[j];
+            answer.addEventListener('click', function(){
+                confirmAns(correctAnswer, array[j])
+            }
+        )
+            answersDiv.appendChild(answer);
+        }
 
         // Append question and answers to container
         container.appendChild(questionDiv);
         container.appendChild(answersDiv);
     }
+}
+
+function confirmAns(correctAnswer, answer)
+{
+    answer = document.getElementById('answer');
+    if (answer == correctAnswer)
+    {
+        answer.style.backgroundColor = '#00FF00'
+        // answer.style.display = 'none';
+    }
+    else
+    {
+        answer.style.backgroundColor = '#FF0000'
+        // answer.style.display = 'none';
+    }
+
 }
 
 async function fetchPexelsData(query) {

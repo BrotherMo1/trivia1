@@ -76,9 +76,14 @@ input
     {
         font-size: 15px;
     }
+    h3{
+        width: 80%;
+        font-size: 16px;
+        margin: auto;
+    }
 
     .imageQ
     {
-        width: 90%;
+        width: 70%;
     }
   }
