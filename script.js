@@ -90,24 +90,26 @@ async function qAs(data) {
         let array = [];
         // Add correct answer
         let correctAnswer = data.results[i].correct_answer;
-        array.push(correctAnswer)
+        array.push(correctAnswer);
 
         // Add incorrect answers
         data.results[i].incorrect_answers.forEach((incorrect) => {
-            array.push(incorrect)
+            array.push(incorrect);
         });
 
-        array.sort(() => Math.random() - .5);
+        // Shuffle answers
+        array.sort(() => Math.random() - 0.5);
 
-        for(j in array)
-        {
-            answer = document.createElement('button');
-            answer.id = 'answer';
+        for (let j = 0; j < array.length; j++) {
+            let answer = document.createElement("button");
+            answer.className = "answer"; 
             answer.innerHTML = array[j];
-            answer.addEventListener('click', function(){
-                confirmAns(correctAnswer, array[j])
-            }
-        )
+
+            // Pass the clicked button to the confirmAns function
+            answer.addEventListener("click", function () {
+                confirmAns(correctAnswer, this);
+            });
+
             answersDiv.appendChild(answer);
         }
 
@@ -117,21 +119,21 @@ async function qAs(data) {
     }
 }
 
-function confirmAns(correctAnswer, answer)
+function confirmAns(correctAnswer, clickedButton) 
 {
-    answer = document.getElementById('answer');
-    if (answer == correctAnswer)
-    {
-        answer.style.backgroundColor = '#00FF00'
-        // answer.style.display = 'none';
-    }
-    else
-    {
-        answer.style.backgroundColor = '#FF0000'
-        // answer.style.display = 'none';
+    if (clickedButton.innerHTML === correctAnswer) {
+        clickedButton.style.backgroundColor = "#00FF00";
+    } else {
+        clickedButton.style.backgroundColor = "#FF0000"; 
     }
 
+    // Disable all buttons after a choice
+    const buttons = clickedButton.parentElement.querySelectorAll(".answer");
+    buttons.forEach((button) => {
+        button.disabled = true; // Disable all buttons
+    });
 }
+
 
 async function fetchPexelsData(query) {
     const url = `https://api.pexels.com/v1/search?per_page=1&query=${encodeURIComponent(query)}`;
