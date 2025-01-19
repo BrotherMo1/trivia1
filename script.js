@@ -2,6 +2,7 @@ let trivApi = "https://opentdb.com/api.php?amount=10";
 const easyApi = trivApi + "&difficulty=easy";
 const midApi = trivApi + "&difficulty=medium";
 const hardApi = trivApi + "&difficulty=hard";
+let score = 0;
 
 let apiKey = "vl3EiNGXGZACABgTOliTXjU9okdiloezxhaMKUbYUjrxY05suMB9fibD";
 
@@ -12,7 +13,6 @@ async function grabUrl() {
         const data = await response.json();
         console.log(data);
         qAs(data); // Render questions and answers
-        await imgDelivery(data); // Attach corresponding images
     } catch (error) {
         console.error("Error Fetching API", error);
     }
@@ -65,64 +65,98 @@ window.onload = categories;
 
 async function qAs(data) {
     let container = document.getElementById("container");
-    container.innerHTML = "";
+    container.innerHTML = ""; // Clear previous content
 
-    for (let i = 0; i < data.results.length; i++) {
+    let currentQuestionIndex = 0;
+
+    function renderQuestion(index) {
+        container.innerHTML = ""; // Clear previous question
+    
+        if (index >= data.results.length) {
+            // All questions answered
+            let message = document.createElement("h2");
+            message.innerHTML = `Done <br> Score: ${score}/10`;
+            container.appendChild(message);
+            return;
+        }
+    
         // Create question container
         let questionDiv = document.createElement("div");
         questionDiv.className = "question";
-
+    
         // Display question text
         let quest = document.createElement("h3");
-        quest.innerHTML = data.results[i].question;
+        quest.innerHTML = data.results[index].question;
         questionDiv.appendChild(quest);
-
+    
         // Display difficulty
         let difficultyDiv = document.createElement("p");
         difficultyDiv.className = "difficulty";
-        difficultyDiv.innerHTML = `<strong>Difficulty:</strong> ${data.results[i].difficulty}`;
+        difficultyDiv.innerHTML = `<strong>Difficulty:</strong> ${data.results[index].difficulty}`;
         questionDiv.appendChild(difficultyDiv);
-
+    
+        // Fetch and display an image
+        const query = `${data.results[index].question} ${data.results[index].correct_answer}`;
+        fetchPexelsData(query).then((imageUrl) => {
+            if (imageUrl) {
+                const img = document.createElement("img");
+                img.src = imageUrl;
+                img.alt = `Image for ${data.results[index].question}`;
+                img.className = "imageQ";
+                questionDiv.appendChild(img); // Append image to question div
+            } else {
+                console.error(`No image found for question: ${data.results[index].question}`);
+            }
+        });
+    
         // Create answers container
         let answersDiv = document.createElement("div");
         answersDiv.className = "answers";
-
+    
         let array = [];
         // Add correct answer
-        let correctAnswer = data.results[i].correct_answer;
+        let correctAnswer = data.results[index].correct_answer;
         array.push(correctAnswer);
-
+    
         // Add incorrect answers
-        data.results[i].incorrect_answers.forEach((incorrect) => {
+        data.results[index].incorrect_answers.forEach((incorrect) => {
             array.push(incorrect);
         });
-
+    
         // Shuffle answers
         array.sort(() => Math.random() - 0.5);
-
+    
         for (let j = 0; j < array.length; j++) {
             let answer = document.createElement("button");
-            answer.className = "answer"; 
+            answer.className = "answer";
             answer.innerHTML = array[j];
-
-            // Pass the clicked button to the confirmAns function
+    
+            // Add click event listener for the answer
             answer.addEventListener("click", function () {
                 confirmAns(correctAnswer, this);
+                currentQuestionIndex++; // Increment the question index
+                setTimeout(() => renderQuestion(currentQuestionIndex), 1000); // Show the next question after 1 second
             });
-
+    
             answersDiv.appendChild(answer);
         }
-
+    
         // Append question and answers to container
         container.appendChild(questionDiv);
         container.appendChild(answersDiv);
     }
+    
+
+    // Start by rendering the first question
+    renderQuestion(currentQuestionIndex);
 }
+
 
 function confirmAns(correctAnswer, clickedButton) 
 {
     if (clickedButton.innerHTML === correctAnswer) {
         clickedButton.style.backgroundColor = "#00FF00";
+        score += 1;
     } else {
         clickedButton.style.backgroundColor = "#FF0000"; 
     }
@@ -151,28 +185,5 @@ async function fetchPexelsData(query) {
     } catch (error) {
         console.error("Error fetching Pexels data:", error);
         return null; // Return null on failure
-    }
-}
-
-async function imgDelivery(data) {
-    const container = document.getElementById("container");
-    const questionElements = document.querySelectorAll(".question");
-
-    for (let i = 0; i < data.results.length; i++) {
-        const query = `${data.results[i].question} ${data.results[i].correct_answer}`;
-        const imageUrl = await fetchPexelsData(query);
-
-        if (imageUrl) {
-            // Create an image element
-            const img = document.createElement("img");
-            img.src = imageUrl;
-            img.alt = `Image for ${data.results[i].question}`;
-            img.className = "imageQ";
-
-            // Append the image to the corresponding question
-            questionElements[i].appendChild(img);
-        } else {
-            console.error(`No image found for question: ${data.results[i].question}`);
-        }
     }
 }
