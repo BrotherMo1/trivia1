@@ -108,9 +108,10 @@ input
         grid-template-columns: 1fr;
 
     }
-    /* #struct
+    #struct
     {
-    } */
+        margin: 20px;
+    }
     #intro
     {
         text-align: center;
