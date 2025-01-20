@@ -173,7 +173,7 @@ function confirmAns(correctAnswer, clickedButton) {
     clearInterval(interval);
 
     // Reset the timer and start again for the next question
-    startTimer(15);  // Reset the timer to 15s
+    startTimer(1);  // Reset the timer to 15s
 }
 
 
