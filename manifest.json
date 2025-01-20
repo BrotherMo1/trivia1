@@ -15,6 +15,21 @@
           "type":"image/png"
        }
     ],
+    "screenshots": [
+      {
+         "src": "scrn390x844.png",
+         "sizes": "1280x720",
+         "type": "image/png",
+         "form_factor": "wide",
+         "label": "o"
+      },
+      {
+         "src": "scrn1280x720.png",
+         "sizes": "1280x720",
+         "type": "image/png",
+         "label": "o"
+      }
+         ],
     "orientation":"any",
     "display":"standalone",
     "dir":"auto",
