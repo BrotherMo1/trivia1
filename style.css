@@ -82,6 +82,11 @@ input
     background-color: #000000;
 }
 
+#timer
+{
+    text-align: center;
+}
+
 
 @media only screen and (max-width: 675px) {
 
