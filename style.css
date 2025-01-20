@@ -88,6 +88,24 @@ input
     font-size: 20px;
 }
 
+#emojies
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#confet
+{
+    height: 300px;
+    width: auto;
+}
+
+#emoF
+{
+    height: 300px;
+    width: auto;
+}
+
 
 @media only screen and (max-width: 675px) {
 

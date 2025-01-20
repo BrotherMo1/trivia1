@@ -82,7 +82,7 @@ function renderQuestion(index) {
         // All questions answered
         let message = document.createElement("h2");
         message.innerHTML = `Done <br> Score: ${score}/10`;
-        message.innerHTML += `<img src="emoF.jpg" alt="face"> <img src="confet.jfif" alt="confeti">`;
+        message.innerHTML += `<div id=emojies> <img src="emoF.jpg" alt="face" id="emof"> <img src="confet.jfif" alt="confeti" id="confet"> </div>`;
         container.appendChild(message);
         return;
     }

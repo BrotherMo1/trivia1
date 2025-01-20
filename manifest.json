@@ -17,14 +17,14 @@
     ],
     "screenshots": [
       {
-         "src": "scrn390x720.png",
-         "sizes": "390x720",
+         "src": "scrn388x763.png",
+         "sizes": "388x763",
          "type": "image/png",
          "form_factor": "wide",
          "label": "o"
       },
       {
-         "src": "scrn1280x720.png",
+         "src": "srcn1280x720.png",
          "sizes": "1280x720",
          "type": "image/png",
          "label": "o"
