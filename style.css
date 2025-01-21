@@ -89,6 +89,12 @@ input:hover {
     font-size: 1em;
 }
 
+.imageQ
+{
+    width: 100%;
+}
+
+
 .answer {
     padding: 10px;
     border-radius: 5px;
