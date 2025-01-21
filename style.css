@@ -117,13 +117,18 @@ input:hover
 
 #installButton
 {
-    text-align: center;
+    background-color: #c3a1ce;
+    border-radius: 10px;
     font-size: 20px;
-    border-radius: 5px;
-    margin: 20px;
-    background-color: rgb(255, 255, 255);
-    color: #2e312f;    
+    padding: 10px;
+    color: white;  
 }
+#installButton:hover
+{
+    background-color: #7a5d8f;
+    color: #d2d0d4;
+}
+
 
 
 @media only screen and (max-width: 675px) {
