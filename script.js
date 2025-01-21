@@ -108,7 +108,7 @@ function renderQuestion(index) {
         // All questions answered
         let message = document.createElement("h2");
         message.innerHTML = `Congratulations You got <br> Score: ${score}/10`;
-        message.innerHTML += `<br> <br> <div id=emojies><img src="emoF.jpg" alt="face" id="emof"> <img src="confet.jfif" alt="confeti" id="confet"> </div>`;
+        message.innerHTML += `<br> <br> <div id=emojies><img src="partFaceE.png" alt="face" id="emof"> <img src="partpop.png" alt="confeti" id="confet"> </div>`;
         clearInterval(interval);
         document.getElementById('timer').innerHTML = ""; // Clear the timer display
         container.appendChild(message);
@@ -127,7 +127,7 @@ function renderQuestion(index) {
     // Display difficulty
     let difficultyDiv = document.createElement("p");
     difficultyDiv.className = "difficulty";
-    difficultyDiv.innerHTML = `<strong>Difficulty:</strong> ${q.results[index].difficulty}`;
+    difficultyDiv.innerHTML = `<br> <strong>Difficulty:</strong> ${q.results[index].difficulty} <br>`;
     questionDiv.appendChild(difficultyDiv);
 
     // Fetch and display an image
@@ -202,7 +202,7 @@ function confirmAns(correctAnswer, clickedButton) {
     clearInterval(interval);
 
     // Reset the timer and start again for the next question
-    startTimer(10);  // Reset the timer to what I want
+    startTimer(10);
 }
 
 
