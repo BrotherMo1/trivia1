@@ -14,6 +14,7 @@ const STATIC_ASSETS = [
   // Add other static files you want to cache
 ];
 
+
 // Install event: Cache static assets
 self.addEventListener('install', event => {
   event.waitUntil(
