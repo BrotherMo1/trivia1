@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trivia</title>
+    <title>Trivia Central</title>
     <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
     <script src="sw.js"></script>
@@ -12,13 +12,13 @@
 <body>
     
     <h1>Welcome to Trivia</h1>
+    <button id="installButton" style="display: none;">Install App</button>
     <div id="timer"></div>
     <div id="holder">
 <div id="intro">
     <p id="struct">To select a difficulty and category look below and select one. If you want all categories and or difficulties leave it how it is and Submit!</p>
 </div>
     <br>
-
     <div id="submission">
 <br><br>
 <form id="form" onsubmit="return handleSubmit(event);">

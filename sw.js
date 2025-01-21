@@ -6,7 +6,11 @@ const DYNAMIC_CACHE_NAME = 'my-app-dynamic-cache-v1';
 const STATIC_ASSETS = [
   'index.html',
   'style.css',
-  'script.js'
+  'script.js',
+  'emoF.jpg',
+  'confet.jfif',
+  'icon512_maskable.png',
+  'icon512_rounded.png'
   // Add other static files you want to cache
 ];
 

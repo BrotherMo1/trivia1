@@ -9,8 +9,34 @@ let interval;
 let timeLeft = 0;
 let currentQuestionIndex = 0;
 let q;
+let deferredPrompt;
 
 let apiKey = "vl3EiNGXGZACABgTOliTXjU9okdiloezxhaMKUbYUjrxY05suMB9fibD";
+
+
+
+// handle install prompt
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+  
+    const installButton = document.getElementById('installButton');
+    installButton.style.display = 'block';
+  
+    installButton.addEventListener('click', () => {
+      installButton.style.display = 'none';
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+        } else {
+          console.log('User dismissed the install prompt');
+        }
+        deferredPrompt = null;
+      });
+    });
+  });                    
+      
 
 async function grabUrl() {
 
@@ -73,7 +99,7 @@ async function qAs() {
     container.innerHTML = ""; // Clear previous content
     // Start by rendering the first question
     renderQuestion(currentQuestionIndex);
-    startTimer(5);
+    startTimer(10);
 }
     
 function renderQuestion(index) {
@@ -82,7 +108,9 @@ function renderQuestion(index) {
         // All questions answered
         let message = document.createElement("h2");
         message.innerHTML = `Congratulations You got <br> Score: ${score}/10`;
-        message.innerHTML += `<br><div id=emojies> <img src="emoF.jpg" alt="face" id="emof"> <img src="confet.jfif" alt="confeti" id="confet"> </div>`;
+        message.innerHTML += `<br> <br> <div id=emojies><img src="emoF.jpg" alt="face" id="emof"> <img src="confet.jfif" alt="confeti" id="confet"> </div>`;
+        clearInterval(interval);
+        document.getElementById('timer').innerHTML = ""; // Clear the timer display
         container.appendChild(message);
         return;
     }
@@ -174,7 +202,7 @@ function confirmAns(correctAnswer, clickedButton) {
     clearInterval(interval);
 
     // Reset the timer and start again for the next question
-    startTimer(15);  // Reset the timer to 15s
+    startTimer(10);  // Reset the timer to what I want
 }
 
 
@@ -224,8 +252,7 @@ async function fetchPexelsData(query) {
         console.error("Error fetching Pexels data:", error);
         return null; // Return null on failure
     }
-}
-
+}         
 
 // sw
 if ('serviceWorker' in navigator) {
