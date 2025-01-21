@@ -116,6 +116,7 @@ input:hover
 }
 #but
 {
+    position: relative;
     text-align: center;
 }
 #installButton
