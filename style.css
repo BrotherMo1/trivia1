@@ -165,3 +165,9 @@ input:hover {
         height: 150px;
     }
 }
+
+@media only screen and (max-width: 450px) {
+    #confet, #emof {
+        height: 125px;
+    }
+}
