@@ -114,7 +114,10 @@ input:hover
     width: auto;
     margin: auto;
 }
-
+#but
+{
+    text-align: center;
+}
 #installButton
 {
     background-color: #c3a1ce;
