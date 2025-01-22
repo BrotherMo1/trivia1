@@ -17,17 +17,15 @@
    ],
    "screenshots": [
      {
-        "src": "scrn388x763.png",
-        "sizes": "388x763",
-        "type": "image/png",
-        "form_factor": "wide",
-        "label": "o"
+        "src": "scrn376x806.png",
+        "sizes": "376x806",
+        "type": "image/png"
      },
      {
-        "src": "srcn1280x720.png",
-        "sizes": "1280x720",
+        "src": "scrn1280x720.png",
+        "sizes": "766x432",
         "type": "image/png",
-        "label": "o"
+        "form_factor": "wide"
      }
         ],
    "orientation":"any",
@@ -37,6 +35,7 @@
    "name":"Trivia Central",
    "short_name":"Trivia",
    "start_url":"brothermo1.github.io/trivia1/",
+   "id": "/brothermo1.github.io/trivia1/",
    "scope": "/",
    "description":"Trivia Game"
 }

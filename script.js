@@ -3,8 +3,8 @@ const easyApi = trivApi + "&difficulty=easy";
 const midApi = trivApi + "&difficulty=medium";
 const hardApi = trivApi + "&difficulty=hard";
 let score = 0;
-let timer;
-let startTime = 0;
+let time;
+let timeStart = 0;
 let interval;
 let timeLeft = 0;
 let currentQuestionIndex = 0;
@@ -101,7 +101,7 @@ async function qAs() {
     container.innerHTML = ""; // Clear previous content
     // Start by rendering the first question
     renderQuestion(currentQuestionIndex);
-    startTimer(10);
+    timerStart(10);
 }
     
 function renderQuestion(index) {
@@ -112,7 +112,7 @@ function renderQuestion(index) {
         message.innerHTML = `Congratulations You got <br> Score: ${score}/10`;
         message.innerHTML += `<br> <br> <div id=emojies><img src="partFaceE.png" alt="face" id="emof"> <img src="partpop.png" alt="confeti" id="confet"> </div>`;
         clearInterval(interval);
-        document.getElementById('timer').innerHTML = ""; // Clear the timer display
+        document.getElementById('time').innerHTML = ""; // Clear the timer display
         container.appendChild(message);
         return;
     }
@@ -204,17 +204,17 @@ function confirmAns(correctAnswer, clickedButton) {
     clearInterval(interval);
 
     // Reset the timer and start again for the next question
-    startTimer(10);
+    timerStart(10);
 }
 
 
-function startTimer(duration) {
-    let timer = duration, minutes, seconds;
-    startTime = Date.now() + 1000; 
+function timerStart(duration) {
+    let time = duration, minutes, seconds;
+    timeStart = Date.now() + 1000; 
 
     interval = setInterval(() => {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
+        minutes = parseInt(time / 60, 10);
+        seconds = parseInt(time % 60, 10);
         
         if (minutes < 10) {
             minutes = "0" + minutes;
@@ -223,15 +223,15 @@ function startTimer(duration) {
             seconds = "0" + seconds;
         }
         
-        document.getElementById('timer').innerHTML = minutes + ":" + seconds + " " + "seconds left";
+        document.getElementById('time').innerHTML = minutes + ":" + seconds + " " + "seconds left";
         
-        if (--timer < 0) {
-            timer = duration;  // Reset timer to original duration
+        if (--time < 0) {
+            time = duration;  // Reset timer to original duration
             currentQuestionIndex++; // Move to the next question
             renderQuestion(currentQuestionIndex); // Render the next question++
-            document.getElementById('timer').innerHTML = ""; // Clear the timer display
+            document.getElementById('time').innerHTML = ""; // Clear the timer display
             clearInterval(interval);  // Stop the current interval
-            startTimer(duration); // Start a new timer
+            timerStart(duration); // Start a new timer
         }
     }, 1000);
 }
