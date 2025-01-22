@@ -7,10 +7,6 @@ const STATIC_ASSETS = [
   'index.html',
   'style.css',
   'script.js',
-  'partFaceE.png',
-  'partpop.png',
-  'icon512_maskable.png',
-  'icon512_rounded.png'
   // Add other static files you want to cache
 ];
 
