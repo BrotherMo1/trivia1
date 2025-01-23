@@ -5,22 +5,26 @@
     padding: 0;
 }
 
-#reset
+#resett
 {
     margin-left: auto;
-    margin-right: 20px;
+    margin-right: auto;
+    text-align: center;
+}
+#reset
+{
+
+    display: inline-block;
+    margin: 20px auto;
+    padding: 15px 30px;
     background-color: #6c63ff;
     color: #fff;
-    font-size: 1em;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    outline: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
     transition: all 0.3s ease-in-out;
-    display: block;
-    width: calc(100% - 40px); /* Adjust width for padding */
-    max-width: 300px;
-    margin: 10px auto;
 }
 
 h1 {
