@@ -5,7 +5,6 @@
     padding: 0;
 }
 
-
 /* https://stackoverflow.com/questions/2486387/how-to-hide-the-scrollbar-using-javascript */
 ::-webkit-scrollbar {
     width: 0px;
