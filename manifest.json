@@ -34,8 +34,8 @@
    "lang":"en-US",
    "name":"Trivia Central",
    "short_name":"Trivia",
-   "start_url":"brothermo1.github.io/trivia1/",
-   "id": "/brothermo1.github.io/trivia1/",
+   "start_url":"https://brothermo1.github.io/trivia1/",
+   "id": "https://brothermo1.github.io/trivia1/",
    "scope": "/",
    "description":"Trivia Game"
 }
