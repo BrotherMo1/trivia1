@@ -16,6 +16,7 @@ let apiKey = "vl3EiNGXGZACABgTOliTXjU9okdiloezxhaMKUbYUjrxY05suMB9fibD";
 
 // make maze installable
 // handle install prompt
+// Ms wear give code
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
@@ -38,7 +39,12 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
   });
 });                        
-      
+  
+function reset()
+{
+    //https://www.w3schools.com/jsref/met_loc_reload.asp
+    location.reload();
+}
 
 async function grabUrl() {
 
@@ -161,7 +167,9 @@ function renderQuestion(index) {
     });
 
     // Shuffle answers
+    // https://coureywong.medium.com/how-to-shuffle-an-array-of-items-in-javascript-39b9efe4b567
     array.sort(() => Math.random() - 0.5);
+
 
     for (let j = 0; j < array.length; j++) {
         let answer = document.createElement("button");
@@ -208,6 +216,7 @@ function confirmAns(correctAnswer, clickedButton) {
 }
 
 
+//kuwar taught me how to use timers properly
 function timerStart(duration) {
     let time = duration, minutes, seconds;
     timeStart = Date.now() + 1000; 
@@ -257,6 +266,7 @@ async function fetchPexelsData(query) {
 }         
 
 // sw
+//fromMsWear
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
       navigator.serviceWorker.register('sw.js').then(function(registration) {

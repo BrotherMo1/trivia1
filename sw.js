@@ -1,3 +1,5 @@
+//Whole thing from MS Wear
+
 // Define cache names
 const CACHE_NAME = 'my-app-cache-v1';
 const DYNAMIC_CACHE_NAME = 'my-app-dynamic-cache-v1';
