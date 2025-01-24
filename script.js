@@ -14,11 +14,10 @@ let apiKey = "vl3EiNGXGZACABgTOliTXjU9okdiloezxhaMKUbYUjrxY05suMB9fibD";
 
 
 
-// make maze installable
+// make game installable
 // handle install prompt
 // Ms wear give code
 let deferredPrompt;
-
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
@@ -210,7 +209,6 @@ function confirmAns(correctAnswer, clickedButton) {
 
     // Clear the existing timer interval
     clearInterval(interval);
-
     // Reset the timer and start again for the next question
     timerStart(10);
 }
@@ -245,7 +243,7 @@ function timerStart(duration) {
     }, 1000);
 }
 
-
+//ms wear given code
 async function fetchPexelsData(query) {
     const url = `https://api.pexels.com/v1/search?per_page=1&query=${encodeURIComponent(query)}`;
     const headers = {

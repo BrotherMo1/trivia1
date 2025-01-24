@@ -32,6 +32,11 @@
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
+#reset:hover
+{
+    background-color: #4a4a8a;
+    color: #f0f0f0;
+}
 
 h1 {
     text-align: center;
