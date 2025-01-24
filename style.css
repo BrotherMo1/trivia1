@@ -193,6 +193,10 @@ input:hover {
     #confet, #emof {
         height: 240px;
     }
+    .imageQ
+    {
+        width: 50%;
+    }
 }
 
 @media only screen and (max-width: 500px) {
