@@ -12,7 +12,10 @@ let q;
 
 let apiKey = "vl3EiNGXGZACABgTOliTXjU9okdiloezxhaMKUbYUjrxY05suMB9fibD";
 
-
+window.onload = function() 
+{
+    console.log("All images came from Pexels Api, and all questions came from Open Trivia Database")
+}
 
 // make game installable
 // handle install prompt
@@ -106,7 +109,7 @@ async function qAs() {
     container.innerHTML = ""; // Clear previous content
     // Start by rendering the first question
     renderQuestion(currentQuestionIndex);
-    timerStart(10);
+    timerStart();
 }
     
 function renderQuestion(index) {
